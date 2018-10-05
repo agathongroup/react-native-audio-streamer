@@ -53,6 +53,7 @@ public class RNAudioStreamerModule extends ReactContextBaseJavaModule implements
     private static final String FINISHED = "FINISHED";
     private static final String BUFFERING = "BUFFERING";
     private static final String ERROR = "ERROR";
+    private static final String LOADERROR = "LOADERROR";
 
     @Override public String getName() {
         return "RNAudioStreamer";
@@ -177,7 +178,7 @@ public class RNAudioStreamerModule extends ReactContextBaseJavaModule implements
 
     @Override
     public void onLoadError(IOException error) {
-        status = ERROR;
+        status = LOADERROR;
         this.sendStatusEvent();
     }
 
