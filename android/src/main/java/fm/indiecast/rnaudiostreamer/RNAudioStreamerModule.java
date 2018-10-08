@@ -53,6 +53,7 @@ public class RNAudioStreamerModule extends ReactContextBaseJavaModule implements
     private static final String STOPPED = "STOPPED";
     private static final String FINISHED = "FINISHED";
     private static final String BUFFERING = "BUFFERING";
+    private static final String LOADBUFFERING = "LOADBUFFERING";
     private static final String ERROR = "ERROR";
     private static final String LOADERROR = "LOADERROR";
 
@@ -156,8 +157,8 @@ public class RNAudioStreamerModule extends ReactContextBaseJavaModule implements
     @Override
     public void onLoadingChanged(boolean isLoading) {
         if (isLoading == true){
-            status = BUFFERING;
-            this.sendStatusEvent();
+            status = LOADBUFFERING;
+            //this.sendStatusEvent();
         }else if (this.player != null){
             if (this.player.getPlayWhenReady()) {
                 status = PLAYING;
