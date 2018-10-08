@@ -29,6 +29,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.PlaybackParameters;
 
 import java.io.IOException;
 import java.util.Map;
@@ -153,11 +154,6 @@ public class RNAudioStreamerModule extends ReactContextBaseJavaModule implements
     }
 
     @Override
-    public void onPositionDiscontinuity() {
-
-    }
-
-    @Override
     public void onLoadingChanged(boolean isLoading) {
         if (isLoading == true){
             status = BUFFERING;
@@ -183,10 +179,25 @@ public class RNAudioStreamerModule extends ReactContextBaseJavaModule implements
     }
 
     @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest) {}
+    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {}
 
     @Override
-    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {}
+    public void onSeekProcessed() {}
+
+    @Override
+    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {}
+
+    @Override
+    public void onPositionDiscontinuity(int f) { }
+
+    @Override
+    public void onShuffleModeEnabledChanged(boolean f) { }
+
+    @Override
+    public void onRepeatModeChanged(int f) { }
+
+    @Override
+    public void onTimelineChanged(Timeline a, Object b, int c) { }
 
     private static String getDefaultUserAgent() {
         StringBuilder result = new StringBuilder(64);
