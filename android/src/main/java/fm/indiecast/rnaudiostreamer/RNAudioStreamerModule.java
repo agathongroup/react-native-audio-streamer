@@ -30,6 +30,8 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.PlaybackParameters;
+import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.upstream.DefaultAllocator;
 
 import java.io.IOException;
 import java.util.Map;
@@ -72,7 +74,15 @@ public class RNAudioStreamerModule extends ReactContextBaseJavaModule implements
 
         // Create player
         TrackSelector trackSelector = new DefaultTrackSelector();
-        LoadControl loadControl = new DefaultLoadControl();
+        LoadControl loadControl = new DefaultLoadControl(
+            new DefaultAllocator(true, C.DEFAULT_BUFFER_SEGMENT_SIZE),
+            10 * 60 * 1000,
+            20 * 60 * 1000,
+            2500,
+            5 * 1000,
+            C.DEFAULT_AUDIO_BUFFER_SIZE * 3,
+            true
+        );
         this.player = ExoPlayerFactory.newSimpleInstance(reactContext, trackSelector, loadControl);
 
         // Create source
